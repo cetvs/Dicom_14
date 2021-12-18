@@ -34,9 +34,12 @@ def RLenc(img,order='F',format=True):
     else:
         return runs
 
+# ввод пути к файлу
 print("введите путь к файлу:")
 image_path = input()
+data_set = dicom.dcmread(image_path)
 
+# ввод координат многоугольника
 print("введите количество точек:")
 point_n = input()
 
@@ -46,16 +49,14 @@ for i in range(int(point_n)):
     x = int(input())
     print("введите y:")
     y = int(input())
-
     xy = [x,y]
-    points_lst.append3(xy)
+    points_lst.append(xy)
     
 
 points = np.array([points_lst])
 
-image_path = 'data/sample.dcm'
-data_set = dicom.dcmread(image_path)
-dcm_sample = dcm_sample = np.array(data_set.pixel_array*128)
+# image_path = 'data/sample.dcm'
+dcm_sample = np.array(data_set.pixel_array*128)
 
 
 # maska
@@ -92,6 +93,7 @@ ax.add_patch(
 
 plt.show()
 
+# сохранение в rle формате
 print("Сохранить rle файл: (Y/N)")
 ch = input()
 if (ch == "Y" or ch == "y"):
@@ -101,6 +103,7 @@ if (ch == "Y" or ch == "y"):
     rle_file.close()
     print(mask_rle[:100])
 
+# сохранение в png формате
 print("Сохранить png файл (D:/Result.png): (Y/N)")
 ch = input()
 if (ch == "Y" or ch == "y"):
