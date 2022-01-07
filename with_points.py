@@ -77,10 +77,12 @@ image_path = filedialog.askopenfilename(initialdir="/", title="Select dicom file
 
 data_set = dicom.dcmread(image_path)
 
-points_lst = write_points()
-points = np.array([points_lst])
+# image_path = 'data/sample.dcm'
+dcm_sample = np.array(data_set.pixel_array*256)
+#  points_lst = write_points()
+points_lst = [[200, 200], [400, 350], [300,500]]
 
-dcm_sample = np.array(data_set.pixel_array*128)
+points = np.array([points_lst])
 cropped = image_cropped(dcm_sample, points)
 
 
